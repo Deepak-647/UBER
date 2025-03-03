@@ -1,28 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import { BsCashStack } from "react-icons/bs";
 import { FaLocationArrow, FaLocationDot } from "react-icons/fa6";
 import { RiArrowDownWideFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
-const ConfirmRidePopUp = (props) => {
-  const [otp, setOtp] = useState("");
-  const submitHandler = (e) => {
-    e.preventDefault();
-  };
+const FinishRide = (props) => {
   return (
     <div>
       <h5
         onClick={() => {
-          props.setConfirmRidePopupPanel(false);
+          props.setFinishRidePanel(false);
         }}
         className="absolute top-2 right-3"
       >
         <RiArrowDownWideFill className="text-3xl" />
       </h5>
       <h3 className="text-2xl font-semibold mb-5">
-        Confirm this ride to Start
+      Finish this Ride
       </h3>
-      <div className="flex items-center justify-between bg-yellow-400 p-3 rounded-lg mt-4">
+      <div className="flex items-center justify-between border  border-yellow-400 p-4 rounded-lg mt-4">
         <div className="flex items-center gap-3 ">
           <img
             className="h-12 w-12 rounded-full object-cover"
@@ -63,40 +59,17 @@ const ConfirmRidePopUp = (props) => {
         </div>
 
         <div className="mt-6 w-full">
-          <form
-            onSubmit={(e) => {
-              submitHandler(e);
-            }}
+          <Link
+            to="/captainhome"
+            className="w-full flex items-center justify-center mt-5 bg-green-600 text-white font-semibold p-2 rounded-lg"
           >
-            <input
-              value={otp}
-              onChange={(e) => {
-                setOtp(e.target.value);
-              }}
-              type="text"
-              className="bg-[#eee] px-6 py-4 font-mono text-lg rounded-lg w-full mt-5"
-              placeholder="Enter OTP"
-            />
-            <Link
-              to="/captain-riding"
-              className="w-full flex items-center justify-center mt-5 bg-green-600 text-white font-semibold p-2 rounded-lg"
-            >
-              Confirm
-            </Link>
-            <button
-              onClick={() => {
-                props.setConfirmRidePopupPanel(false);
-                props.setRidePopupPanel(false);
-              }}
-              className="w-full mt-2 bg-red-500 text-white font-semibold p-2 rounded-lg"
-            >
-              Cancel
-            </button>
-          </form>
+            Finish Ride
+          </Link>
+          
         </div>
       </div>
     </div>
   );
 };
 
-export default ConfirmRidePopUp;
+export default FinishRide;
