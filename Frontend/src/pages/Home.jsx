@@ -87,7 +87,7 @@ const Home = () => {
         transform: "translateY(100%)",
       });
     }
-  }, [waitingForDriverref]);
+  }, [waitingForDriver]);
 
   return (
     <div className="h-screen relative overflow-hidden">
