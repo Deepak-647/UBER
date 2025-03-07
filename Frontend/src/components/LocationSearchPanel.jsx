@@ -1,23 +1,31 @@
 import React from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
-const LocationSearchPanel = (props) => {
-  //sample array of locations
-  const locations = [
-    "10A, Opposite Central Mall, Code Masters Academy, Mumbai",
-    "15C, Beside Green Park, DevX Training Center, Bangalore",
-    "32D, Near Metro Station, Tech Innovators Hub, Hyderabad",
-    "7B, Adjacent to City Library, FullStack Pro Institute, Chennai",
-    "21E, Behind Market Square, JavaScript Gurukul, Pune",
-  ];
+const LocationSearchPanel = ({
+  suggestions,
+  setVehiclePanel,
+  setPanelOpen,
+  setPickup,
+  setDestination,
+  activeField,
+}) => {
+  const handleSuggestionClick = (suggestion) => {
+    if (activeField === "pickup") {
+      setPickup(suggestion);
+    } else if (activeField === "destination") {
+      setDestination(suggestion);
+    }
+    // setVehiclePanel(true)
+    // setPanelOpen(false)
+  };
   return (
     <div>
-      {locations.map((location, index) => (
+
+      {suggestions.map((location, index) => (
         <div
           key={index}
           onClick={() => {
-            props.setVehiclePanel(true);
-            props.setPanelOpen(false);
+            handleSuggestionClick(location);
           }}
           className="flex gap-4 border-2 p-3 border-gray-100 active:border-black  rounded-xl items-center my-2 justify-start"
         >

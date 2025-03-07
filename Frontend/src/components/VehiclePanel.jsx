@@ -3,6 +3,7 @@ import { FaUser } from "react-icons/fa";
 import { RiArrowDownWideFill } from "react-icons/ri";
 
 const VehiclePanel = (props) => {
+
   return (
     <div>
       <h5
@@ -17,6 +18,7 @@ const VehiclePanel = (props) => {
       <div
         onClick={() => {
           props.setConfirmRidePanel(true);
+          props.selectVehicle('car')
         }}
         className="flex w-full mb-2 border active:border-black rounded-xl p-3 items-center   justify-between"
       >
@@ -37,11 +39,12 @@ const VehiclePanel = (props) => {
             Affordable, compact rides
           </p>
         </div>
-        <h2 className="text-lg font-semibold">₹193.2</h2>
+        <h2 className="text-lg font-semibold">₹{props.fare.car}</h2>
       </div>
       <div
         onClick={() => {
           props.setConfirmRidePanel(true);
+          props.selectVehicle('moto')
         }}
         className="flex w-full mb-2 border active:border-black rounded-xl p-3 items-center   justify-between"
       >
@@ -62,11 +65,12 @@ const VehiclePanel = (props) => {
             Affordable, Bike rides
           </p>
         </div>
-        <h2 className="text-lg font-semibold">₹63.2</h2>
+        <h2 className="text-lg font-semibold">₹{props.fare.moto}</h2>
       </div>
       <div
         onClick={() => {
           props.setConfirmRidePanel(true);
+          props.selectVehicle('auto')
         }}
         className="flex w-full mb-2 border active:border-black rounded-xl p-3 items-center   justify-between"
       >
@@ -87,7 +91,7 @@ const VehiclePanel = (props) => {
             Affordable, Auro rides
           </p>
         </div>
-        <h2 className="text-lg font-semibold">₹113.2</h2>
+        <h2 className="text-lg font-semibold">₹{props.fare.auto}</h2>
       </div>
     </div>
   );

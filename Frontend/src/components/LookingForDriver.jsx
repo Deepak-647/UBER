@@ -7,14 +7,14 @@ import { BsCashStack } from "react-icons/bs";
 const LookingForDriver = (props) => {
   return (
     <div>
-      <h5
+      {/* <h5
         onClick={() => {
           props.setVehicleFound(false);
         }}
         className="absolute top-2 right-3"
       >
         <RiArrowDownWideFill className="text-3xl" />
-      </h5>
+      </h5> */}
       <h3 className="text-2xl font-semibold mb-5">Looking for a Driver</h3>
       <div className="flex flex-col gap-2 justify-between items-center">
         <img
@@ -28,7 +28,7 @@ const LookingForDriver = (props) => {
             <div>
               <h3 className="text-lg font-medium">562/11-A</h3>
               <p className="text-sm -mt-1 text-gray-600 ">
-                Kankariya Talab, Ahemdabad
+                {props.pickup}
               </p>
             </div>
           </div>
@@ -37,14 +37,14 @@ const LookingForDriver = (props) => {
             <div>
               <h3 className="text-lg font-medium">562/11-A</h3>
               <p className="text-sm -mt-1 text-gray-600 ">
-                Kankariya Talab, Ahemdabad
+              {props.destination}
               </p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3 ">
             <BsCashStack className="text-lg" />
             <div>
-              <h3 className="text-lg font-medium">₹ 193.26</h3>
+              <h3 className="text-lg font-medium">₹ {props.fare[props.vehicleType]}</h3>
               <p className="text-sm -mt-1 text-gray-600 ">Cash</p>
             </div>
           </div>

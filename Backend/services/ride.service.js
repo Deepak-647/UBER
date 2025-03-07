@@ -34,6 +34,7 @@ const getFare = async (pickup, destination) => {
 
   return fare;
 };
+module.exports.getFare = getFare
 
 const getOtp = (num)=>{
  function generateOtp(){
