@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { MdLogout } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useGSAP } from "@gsap/react";
@@ -6,12 +6,21 @@ import gsap from "gsap";
 import CaptainDetails from "../components/CaptainDetails";
 import RidePopUp from "../components/RidePopUp";
 import ConfirmRidePopUp from "../components/ConfirmRidePopUp";
+import { SocketContext } from "../context/SocketContext";
+import { CaptainDataContext } from "../context/CaptainContext";
 
 const CaptainHome = () => {
   const [ridePopupPanel, setRidePopupPanel] = useState(true);
   const [confirmRidePopupPanel, setConfirmRidePopupPanel] = useState(false);
   const ridePopupPanelref = useRef(null);
   const confirmRidePopupPanelref = useRef(null);
+
+  const { socket } = useContext(SocketContext);
+  const { captain } = useContext(CaptainDataContext);
+
+  useEffect(() => {
+    socket.emit("join", { userType: "captain", userId: captain._id });
+  }, [captain]);
 
   useGSAP(() => {
     if (ridePopupPanel) {
@@ -24,7 +33,6 @@ const CaptainHome = () => {
       });
     }
   }, [ridePopupPanel]);
-
 
   useGSAP(() => {
     if (confirmRidePopupPanel) {
@@ -66,16 +74,22 @@ const CaptainHome = () => {
         ref={ridePopupPanelref}
         className="fixed w-full z-10 bottom-0 bg-white px-3 py-8 translate-y-full  pt-12"
       >
-        <RidePopUp setRidePopupPanel={setRidePopupPanel} setConfirmRidePopupPanel={setConfirmRidePopupPanel}/>
+        <RidePopUp
+          setRidePopupPanel={setRidePopupPanel}
+          setConfirmRidePopupPanel={setConfirmRidePopupPanel}
+        />
       </div>
       <div
         ref={confirmRidePopupPanelref}
         className="fixed w-full h-screen z-10 bottom-0 bg-white px-3 py-8 translate-y-full  pt-12"
       >
-        <ConfirmRidePopUp setConfirmRidePopupPanel={setConfirmRidePopupPanel} setRidePopupPanel={setRidePopupPanel} />
+        <ConfirmRidePopUp
+          setConfirmRidePopupPanel={setConfirmRidePopupPanel}
+          setRidePopupPanel={setRidePopupPanel}
+        />
       </div>
     </div>
   );
-}; 
+};
 
 export default CaptainHome;

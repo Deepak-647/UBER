@@ -1,14 +1,15 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { RiArrowDownWideFill } from "react-icons/ri";
 import LocationSearchPanel from "../components/LocationSearchPanel";
-
 import VehiclePanel from "../components/VehiclePanel";
 import ConfirmRide from "../components/ConfirmRide";
 import LookingForDriver from "../components/LookingForDriver";
 import WaitingForDriver from "../components/WaitingForDriver";
 import axios from "axios";
+import { SocketContext } from "../context/SocketContext";
+import { UserDataContext } from "../context/userContext";
 
 const Home = () => {
   const [pickup, setPickup] = useState("");
@@ -29,6 +30,14 @@ const Home = () => {
   const [findTripBtn, setFindTripBtn] = useState(false);
   const [fare, setFare] = useState({});
   const [vehicleType, setVehicleType] = useState(null);
+
+  const { socket } = useContext(SocketContext);
+  const { user } = useContext(UserDataContext);
+
+  useEffect(() => {
+    socket.emit("join", { userType: "user", userId: user._id });
+  }, [user]);
+
   const handlePickupChange = async (e) => {
     setPickup(e.target.value);
     try {
@@ -281,7 +290,7 @@ const Home = () => {
       >
         <LookingForDriver
           pickup={pickup}
-          destination={destination}     
+          destination={destination}
           fare={fare}
           vehicleType={vehicleType}
           setVehicleFound={setVehicleFound}
