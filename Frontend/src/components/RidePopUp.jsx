@@ -23,7 +23,7 @@ const RidePopUp = (props) => {
             src="https://plus.unsplash.com/premium_photo-1689530775582-83b8abdb5020?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fHww"
             alt=""
           />
-          <h2 className="text-xl text-font-medium">Deepak Behera</h2>
+          <h2 className="text-xl text-font-medium">{props.ride?.user.fullname.firstname +" " + props.ride?.user.fullname.lastname}</h2>
         </div>
         <h5 className="text-lg font-semibold">2.2 Km</h5>
       </div>
@@ -34,7 +34,7 @@ const RidePopUp = (props) => {
             <div>
               <h3 className="text-lg font-medium">562/11-A</h3>
               <p className="text-sm -mt-1 text-gray-600 ">
-                Kankariya Talab, Ahemdabad
+                {props.ride?.pickup}
               </p>
             </div>
           </div>
@@ -43,14 +43,14 @@ const RidePopUp = (props) => {
             <div>
               <h3 className="text-lg font-medium">562/11-A</h3>
               <p className="text-sm -mt-1 text-gray-600 ">
-                Kankariya Talab, Ahemdabad
+                {props.ride?.destination}
               </p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3 ">
             <BsCashStack className="text-lg" />
             <div>
-              <h3 className="text-lg font-medium">₹ 193.26</h3>
+              <h3 className="text-lg font-medium">₹ {props.ride?.fare}</h3>
               <p className="text-sm -mt-1 text-gray-600 ">Cash</p>
             </div>
           </div>
