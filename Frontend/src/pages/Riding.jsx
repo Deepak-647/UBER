@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { IoIosHome } from "react-icons/io";
 import { FaLocationArrow } from "react-icons/fa";
 import { BsCashStack } from "react-icons/bs";
 import { Link, useLocation } from "react-router-dom";
+import {SocketContext} from '../context/SocketContext';
+import { useNavigate } from "react-router-dom";
+
 
 const Riding = () => {
   const location = useLocation();
   const {ride} = location.state || {} //Retrive ride data
+  const {socket} =useContext(SocketContext)
+  const navigate = useNavigate();
+ 
+  socket.on('ride-ended',()=>{
+    navigate('/home')
+  })
+
+
   return (
     <div className="h-screen">
         <Link to="/home" className="fixed right-2 top-2 h-10 w-10 bg-white flex items-center justify-center rounded-full">

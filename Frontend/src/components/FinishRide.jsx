@@ -2,9 +2,28 @@ import React from "react";
 import { BsCashStack } from "react-icons/bs";
 import { FaLocationArrow, FaLocationDot } from "react-icons/fa6";
 import { RiArrowDownWideFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const FinishRide = (props) => {
+  const navigate = useNavigate();
+  async function endRide() {
+    const response = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/rides/end-ride`,
+      {
+        rideId: props.ride._id,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+
+    if (response.status === 200) {
+      navigate("/captainhome");
+    }
+  }
   return (
     <div>
       <h5
@@ -15,9 +34,7 @@ const FinishRide = (props) => {
       >
         <RiArrowDownWideFill className="text-3xl" />
       </h5>
-      <h3 className="text-2xl font-semibold mb-5">
-      Finish this Ride
-      </h3>
+      <h3 className="text-2xl font-semibold mb-5">Finish this Ride</h3>
       <div className="flex items-center justify-between border  border-yellow-400 p-4 rounded-lg mt-4">
         <div className="flex items-center gap-3 ">
           <img
@@ -25,7 +42,9 @@ const FinishRide = (props) => {
             src="https://plus.unsplash.com/premium_photo-1689530775582-83b8abdb5020?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fHww"
             alt=""
           />
-          <h2 className="text-xl text-font-medium">{props.ride?.user.fullname.firstname}</h2>
+          <h2 className="text-xl text-font-medium">
+            {props.ride?.user.fullname.firstname}
+          </h2>
         </div>
         <h5 className="text-lg font-semibold">2.2 Km</h5>
       </div>
@@ -59,13 +78,12 @@ const FinishRide = (props) => {
         </div>
 
         <div className="mt-6 w-full">
-          <Link
-            to="/captainhome"
+          <button
+            onClick={endRide}
             className="w-full flex items-center justify-center mt-5 bg-green-600 text-white font-semibold p-2 rounded-lg"
           >
             Finish Ride
-          </Link>
-          
+          </button>
         </div>
       </div>
     </div>
