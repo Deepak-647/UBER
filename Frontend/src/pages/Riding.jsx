@@ -2,9 +2,11 @@ import React from "react";
 import { IoIosHome } from "react-icons/io";
 import { FaLocationArrow } from "react-icons/fa";
 import { BsCashStack } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Riding = () => {
+  const location = useLocation();
+  const {ride} = location.state || {} //Retrive ride data
   return (
     <div className="h-screen">
         <Link to="/home" className="fixed right-2 top-2 h-10 w-10 bg-white flex items-center justify-center rounded-full">
@@ -25,8 +27,8 @@ const Riding = () => {
             alt=""
           />
           <div className="text-right">
-            <h2 className="text-lg font-medium">Deepak</h2>
-            <h4 className="text-xl font-semibold -mt-1 -mb-1">OD 09 Q 7051</h4>
+            <h2 className="text-lg font-medium">{ride?.captain.fullname.firstname}</h2>
+            <h4 className="text-xl font-semibold -mt-1 -mb-1">{ride?.captain.vehicle.plate}</h4>
             <p className="text-sm text-gray-600">Maruti Suzuki Alto</p>
           </div>
         </div>
@@ -39,14 +41,14 @@ const Riding = () => {
               <div>
                 <h3 className="text-lg font-medium">562/11-A</h3>
                 <p className="text-sm -mt-1 text-gray-600 ">
-                  Kankariya Talab, Ahemdabad
+                  {ride?.destination}
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-5 p-3 ">
               <BsCashStack className="text-lg" />
               <div>
-                <h3 className="text-lg font-medium">₹ 193.26</h3>
+                <h3 className="text-lg font-medium">₹ {ride?.fare}</h3>
                 <p className="text-sm -mt-1 text-gray-600 ">Cash</p>
               </div>
             </div>

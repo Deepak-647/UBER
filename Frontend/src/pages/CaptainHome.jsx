@@ -8,6 +8,7 @@ import RidePopUp from "../components/RidePopUp";
 import ConfirmRidePopUp from "../components/ConfirmRidePopUp";
 import { SocketContext } from "../context/SocketContext";
 import { CaptainDataContext } from "../context/CaptainContext";
+import axios from "axios";
 
 const CaptainHome = () => {
   const [ridePopupPanel, setRidePopupPanel] = useState(false);
@@ -47,6 +48,23 @@ const CaptainHome = () => {
     setRide(data);
     setRidePopupPanel(true);
   });
+
+  const confirmRide = async () => {
+    const response = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/rides/confirm`,
+      {
+        rideId: ride._id,
+        captainId: captain._id,
+       
+      },{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    setRidePopupPanel(false);
+    setConfirmRidePopupPanel(true);
+  };
 
   useGSAP(() => {
     if (ridePopupPanel) {
@@ -104,6 +122,7 @@ const CaptainHome = () => {
           ride={ride}
           setRidePopupPanel={setRidePopupPanel}
           setConfirmRidePopupPanel={setConfirmRidePopupPanel}
+          confirmRide={confirmRide}
         />
       </div>
       <div
@@ -111,6 +130,7 @@ const CaptainHome = () => {
         className="fixed w-full h-screen z-10 bottom-0 bg-white px-3 py-8 translate-y-full  pt-12"
       >
         <ConfirmRidePopUp
+        ride={ride}
           setConfirmRidePopupPanel={setConfirmRidePopupPanel}
           setRidePopupPanel={setRidePopupPanel}
         />

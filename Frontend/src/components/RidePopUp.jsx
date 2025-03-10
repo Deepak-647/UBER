@@ -67,6 +67,7 @@ const RidePopUp = (props) => {
           <button
             onClick={() => {
               props.setConfirmRidePopupPanel(true);
+              props.confirmRide()
             }}
             className="px-10  bg-green-600 text-white font-semibold p-2 rounded-lg"
           >
