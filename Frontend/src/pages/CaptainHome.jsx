@@ -9,6 +9,7 @@ import ConfirmRidePopUp from "../components/ConfirmRidePopUp";
 import { SocketContext } from "../context/SocketContext";
 import { CaptainDataContext } from "../context/CaptainContext";
 import axios from "axios";
+import LiveTracking from "../components/LiveTracking";
 
 const CaptainHome = () => {
   const [ridePopupPanel, setRidePopupPanel] = useState(false);
@@ -55,8 +56,8 @@ const CaptainHome = () => {
       {
         rideId: ride._id,
         captainId: captain._id,
-       
-      },{
+      },
+      {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -105,11 +106,7 @@ const CaptainHome = () => {
       </Link>
 
       <div className="h-3/5">
-        <img
-          className="h-full w-full object-cover"
-          src="https://i1.wp.com/www.xamboy.com/wp-content/uploads/2019/05/Screenshot-2019-05-17-18.35.31.png?fit=838%2C640&ssl=1"
-          alt=""
-        />
+        <LiveTracking />
       </div>
       <div className="h-2/5 p-6">
         <CaptainDetails />
@@ -130,7 +127,7 @@ const CaptainHome = () => {
         className="fixed w-full h-screen z-10 bottom-0 bg-white px-3 py-8 translate-y-full  pt-12"
       >
         <ConfirmRidePopUp
-        ride={ride}
+          ride={ride}
           setConfirmRidePopupPanel={setConfirmRidePopupPanel}
           setRidePopupPanel={setRidePopupPanel}
         />

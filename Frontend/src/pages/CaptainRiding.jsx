@@ -5,6 +5,7 @@ import { IoIosArrowUp } from "react-icons/io";
 import { MdLogout } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 import FinishRide from "../components/FinishRide";
+import LiveTracking from "../components/LiveTracking";
 
 const CaptainRiding = () => {
   const [finishRidePanel, setFinishRidePanel] = useState(false);
@@ -38,11 +39,7 @@ const CaptainRiding = () => {
       </Link>
 
       <div className="h-4/5">
-        <img
-          className="h-full w-full object-cover"
-          src="https://i1.wp.com/www.xamboy.com/wp-content/uploads/2019/05/Screenshot-2019-05-17-18.35.31.png?fit=838%2C640&ssl=1"
-          alt=""
-        />
+        <LiveTracking />
       </div>
       <div
         onClick={() => {
@@ -62,10 +59,7 @@ const CaptainRiding = () => {
         ref={finishRidePanelRef}
         className="fixed w-full z-10 bottom-0 bg-white px-3 py-8 translate-y-full  pt-12"
       >
-        <FinishRide
-          ride={rideData}
-          setFinishRidePanel={setFinishRidePanel}
-        />
+        <FinishRide ride={rideData} setFinishRidePanel={setFinishRidePanel} />
       </div>
     </div>
   );
