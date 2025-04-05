@@ -45,7 +45,7 @@ module.exports.getAutoCompleteSuggestions = async (req, res, next) => {
 
     res.status(200).json(suggestions);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Internal server error" });
+    console.error(err.message);
+    res.status(500).json({ message: "Internal server error", err ,error: err.message });
   }
 };
