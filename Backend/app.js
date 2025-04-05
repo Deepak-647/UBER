@@ -14,7 +14,7 @@ connectDB();
 
 app.use(cors(
   {
-    origin: "https://go-fleet.netlify.app/", // Replace with your actual Netlify URL
+    origin: "https://go-fleet.netlify.app", // Replace with your actual Netlify URL
     methods: "GET,POST",
     credentials: true,
   }
